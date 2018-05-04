@@ -1,0 +1,23 @@
+<?php
+$_['heading_title'] = 'Bitcoinus';
+$_['text_bitcoinus'] = '<img src="view/image/payment/bitcoinus.svg" alt="Bitcoinus" title="Bitcoinus" style="max-height: 23px;">';
+$_['nls_general'] = 'General settings';
+$_['nls_extensions'] = 'Extensions';
+$_['nls_success'] = 'Settings were successfully saved.';
+$_['nls_enabled'] = 'Enabled';
+$_['nls_disabled'] = 'Disabled';
+$_['nls_on'] = 'On';
+$_['nls_off'] = 'Off';
+$_['nls_send'] = 'Send';
+$_['nls_dontsend'] = "Don't send";
+$_['nls_status'] = 'Payment method is:';
+$_['nls_pid'] = 'Project ID:';
+$_['nls_pid_desc'] = 'Bitcoinus issued project identification number.';
+$_['nls_key'] = 'Secret key:';
+$_['nls_items'] = 'Send items info:';
+$_['nls_items_desc'] = "Enable this if you want to send Bitcoinus information about purchased items. Bitcoinus doesn't store this information, it is only displayed for your client while payment is being processed.";
+$_['nls_test'] = 'Test mode:';
+$_['nls_test_desc'] = 'Enable this if you only want to test payment gateway without processing real payments.';
+$_['error_permission'] = 'You are not authorized to change Bitcoinus module settings.';
+$_['error_pid'] = 'Enter project ID';
+$_['error_key'] = 'Enter secret key';
