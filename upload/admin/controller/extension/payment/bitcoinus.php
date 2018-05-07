@@ -12,6 +12,7 @@ class ControllerExtensionPaymentBitcoinus extends Controller
     'heading_title' => 'extension/payment/bitcoinus'
   ];
   private $configFields = [
+    'bitcoinus_status',
     'payment_bitcoinus_status',
     'payment_bitcoinus_pid',
     'payment_bitcoinus_key',
@@ -20,13 +21,20 @@ class ControllerExtensionPaymentBitcoinus extends Controller
   ];
 
   public function index(){
+    if (isset($this->session->data['user_token'])) {
+      $extensions_path = 'marketplace';
+      $setting_prefix = 'payment_bitcoinus';
+    } else {
+      $extensions_path = 'extension';
+      $setting_prefix = 'bitcoinus';
+    }
     $this->load->language('extension/payment/bitcoinus');
     $this->document->setTitle($this->language->get('heading_title'));
     $this->load->model('setting/setting');
     if ($this->request->server['REQUEST_METHOD']=='POST' && $this->validate()) {
-      $this->model_setting_setting->editSetting('payment_bitcoinus',$this->request->post);
+      $this->model_setting_setting->editSetting($setting_prefix,$this->request->post);
       $this->session->data['success'] = $this->generateData('nls_success','');
-      $this->response->redirect($this->generateData('','marketplace/extension'));
+      $this->response->redirect($this->generateData('',$extensions_path.'/extension'));
     }
     foreach ($this->getErrorField() as $fieldName) {
       $dataName = 'error_'.$fieldName;
@@ -41,7 +49,8 @@ class ControllerExtensionPaymentBitcoinus extends Controller
     $data['header'] = $this->load->controller('common/header');
     $data['column_left'] = $this->load->controller('common/column_left');
     $data['footer'] = $this->load->controller('common/footer');
-    $this->response->setOutput($this->load->view('extension/payment/bitcoinus', $data));
+    $data['nls'] = $this->language->all();
+    $this->response->setOutput($this->load->view('extension/payment/bitcoinus',$data));
   }
 
   protected function validate(){
@@ -61,14 +70,23 @@ class ControllerExtensionPaymentBitcoinus extends Controller
   }
 
   private function generateData($text,$path){
-    if ($path == 'marketplace/extension') {
+    if (isset($this->session->data['user_token'])) {
+      $user_token_arg = 'user_token';
+      $extensions_path = 'marketplace';
+      $user_token = $this->session->data['user_token'];
+    } else {
+      $user_token_arg = 'token';
+      $extensions_path = 'extension';
+      $user_token = $this->session->data['token'];
+    }
+    if ($path == $extensions_path.'/extension') {
       $tokenParam = '';
     } else {
       $tokenParam = '&type=payment';
     }
-    $token = 'user_token='.$this->session->data['user_token'].$tokenParam;
+    $token = $user_token_arg.'='.$user_token.$tokenParam;
     if (empty($text)) {
-      $data = $this->url->link($path, $token, TRUE);
+      $data = $this->url->link($path,$token,TRUE);
     } elseif (empty($path)) {
       $data = $this->language->get($text);
     } else {

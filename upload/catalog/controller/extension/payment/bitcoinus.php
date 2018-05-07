@@ -6,6 +6,7 @@ class ControllerExtensionPaymentBitcoinus extends Controller
   public function index(){
     $this->load->language('extension/payment/bitcoinus');
     $data['action'] = $this->url->link('extension/payment/bitcoinus/confirm','','SSL');
+    $data['nls'] = $this->language->all();
     if ($this->request->get['route'] != 'checkout/guest/confirm') {
       $data['back'] = HTTPS_SERVER.'index.php?route=checkout/payment';
     } else {

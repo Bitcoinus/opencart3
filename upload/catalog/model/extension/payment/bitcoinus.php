@@ -3,7 +3,7 @@
 class ModelExtensionPaymentBitcoinus extends Model
 {
 
-    public function getMethod($address,$total)
+    public function getMethod()
     {
 
         $this->load->language('extension/payment/bitcoinus');
