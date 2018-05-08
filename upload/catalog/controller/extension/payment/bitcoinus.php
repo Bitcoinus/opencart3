@@ -79,7 +79,7 @@ class ControllerExtensionPaymentBitcoinus extends Controller
 
     // perform redirect
     $args = [ 'data' => base64_encode($data), 'signature' => hash_hmac('sha256',$data,$key) ];
-    header('Location: https://pts.bitcoinus.io/init?'.http_build_query($args));
+    header('Location: https://pay.bitcoinus.io/init?'.http_build_query($args));
 		exit();
   }
 
