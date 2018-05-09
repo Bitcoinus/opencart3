@@ -1,0 +1,23 @@
+<?php
+$_['heading_title'] = 'Bitcoinus';
+$_['text_bitcoinus'] = '<img src="view/image/payment/bitcoinus.svg" alt="Bitcoinus" title="Bitcoinus" style="max-height: 23px;">';
+$_['nls_general'] = 'Bendros nuostatos';
+$_['nls_extensions'] = 'Moduliai';
+$_['nls_success'] = 'Nustatymai sėkmingai išsaugoti.';
+$_['nls_enabled'] = 'Įjungta';
+$_['nls_disabled'] = 'Išjungta';
+$_['nls_on'] = 'Įjungta';
+$_['nls_off'] = 'Išjungta';
+$_['nls_send'] = 'Siųsti';
+$_['nls_dontsend'] = 'Nesiųsti';
+$_['nls_status'] = 'Mokėjimo būdas:';
+$_['nls_pid'] = 'Projekto ID:';
+$_['nls_pid_desc'] = 'Bitcoinus pateiktas projekto identifikacinis numeris.';
+$_['nls_key'] = 'Slaptažodis:';
+$_['nls_items'] = 'Siųsti pirkinių informaciją:';
+$_['nls_items_desc'] = 'Įjunkite šį funkcionalumą, jei norite siųsti Bitcoinus informaciją apie įsigyjamas prekes. Bitcoinus šios informacijos nesaugo, ji tik atvaizduojama pirkimo metu norint padaryti pirkimo procesą patogesnį.';
+$_['nls_test'] = 'Testavimo režymas:';
+$_['nls_test_desc'] = 'Įjunkite, jei norite patestuoti sistemos veikimą neatliekant realių mokėjimų.';
+$_['error_permission'] = 'Jums neleidžiama keisti šio modulio nustatymus.';
+$_['error_pid'] = 'Įveskite projekto ID';
+$_['error_key'] = 'Įveskite slaptažodį';
