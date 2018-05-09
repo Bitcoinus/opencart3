@@ -47,7 +47,7 @@ class ControllerExtensionPaymentBitcoinus extends Controller
     foreach ($this->getBreadcrumbs() as $key => $value) $data['breadcrumbs'][] = $this->generateData($key,$value);
     $data['action'] = $this->generateData('','extension/payment/bitcoinus');
     $data['cancel'] = $this->generateData('','marketplace/extension');
-    $data['callback'] = HTTP_CATALOG . 'index.php?route=extension/payment/bitcoinus/callback';
+    $data['callback'] = HTTP_CATALOG.'index.php?route=extension/payment/bitcoinus/callback';
     foreach ($this->getConfigFields() as $field) $data[$field] = $this->generateConfigField($field);
     $this->validateProject($this->config->get($setting_prefix.'_pid'));
     $data['header'] = $this->load->controller('common/header');
