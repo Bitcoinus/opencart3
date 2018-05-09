@@ -14,9 +14,13 @@ class ControllerExtensionPaymentBitcoinus extends Controller
   private $configFields = [
     'bitcoinus_status',
     'payment_bitcoinus_status',
+    'bitcoinus_pid',
     'payment_bitcoinus_pid',
+    'bitcoinus_key',
     'payment_bitcoinus_key',
+    'bitcoinus_items',
     'payment_bitcoinus_items',
+    'bitcoinus_test',
     'payment_bitcoinus_test'
   ];
 
@@ -40,12 +44,12 @@ class ControllerExtensionPaymentBitcoinus extends Controller
       $dataName = 'error_'.$fieldName;
       $data[$dataName] = $this->errorValue($fieldName);
     }
-    foreach ($this->getBreadcrumbs() as $key => $value) $data['breadcrumbs'][] = $this->generateData($key, $value);
+    foreach ($this->getBreadcrumbs() as $key => $value) $data['breadcrumbs'][] = $this->generateData($key,$value);
     $data['action'] = $this->generateData('','extension/payment/bitcoinus');
     $data['cancel'] = $this->generateData('','marketplace/extension');
     $data['callback'] = HTTP_CATALOG . 'index.php?route=extension/payment/bitcoinus/callback';
     foreach ($this->getConfigFields() as $field) $data[$field] = $this->generateConfigField($field);
-    $this->validateProject($this->config->get('payment_bitcoinus_pid'));
+    $this->validateProject($this->config->get($setting_prefix.'_pid'));
     $data['header'] = $this->load->controller('common/header');
     $data['column_left'] = $this->load->controller('common/column_left');
     $data['footer'] = $this->load->controller('common/footer');
@@ -55,8 +59,8 @@ class ControllerExtensionPaymentBitcoinus extends Controller
 
   protected function validate(){
     if (!$this->user->hasPermission('modify','extension/payment/bitcoinus')) $this->error['warning'] = $this->language->get('error_warning');
-    if (!$this->request->post['payment_bitcoinus_pid']) $this->error['pid'] = $this->language->get('error_pid');
-    if (!$this->request->post['payment_bitcoinus_key']) $this->error['key'] = $this->language->get('error_key');
+    if ((!$this->request->post['payment_bitcoinus_pid'])&&(!$this->request->post['bitcoinus_pid'])) $this->error['pid'] = $this->language->get('error_pid');
+    if ((!$this->request->post['payment_bitcoinus_key'])&&(!$this->request->post['bitcoinus_key'])) $this->error['key'] = $this->language->get('error_key');
     return !$this->error;
   }
 

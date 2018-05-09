@@ -68,8 +68,8 @@
             <div class="form-group required">
               <label class="col-sm-2 control-label" for="entry-pid"><?php echo $nls['nls_pid'] ?></label>
               <div class="col-sm-10">
-                <input type="number" name="payment_bitcoinus_pid" id="entry-pid" class="form-control" value="<?php echo $payment_bitcoinus_pid ?>">
-                <?php if (empty($payment_bitcoinus_pid)) { ?>
+                <input type="number" name="bitcoinus_pid" id="entry-pid" class="form-control" value="<?php echo $bitcoinus_pid ?>">
+                <?php if (empty($bitcoinus_pid)) { ?>
                   <div class="text-danger"><?php echo $nls['error_pid'] ?></div>
                 <?php } ?>
                 <br>
@@ -82,8 +82,8 @@
             <div class="form-group required">
               <label class="col-sm-2 control-label" for="entry-key"><?php echo $nls['nls_key'] ?></label>
               <div class="col-sm-10">
-                <input type="text" name="payment_bitcoinus_key" id="entry-key" class="form-control" value="<?php echo $payment_bitcoinus_key ?>">
-                <?php if (empty($payment_bitcoinus_key)) { ?>
+                <input type="text" name="bitcoinus_key" id="entry-key" class="form-control" value="<?php echo $bitcoinus_key ?>">
+                <?php if (empty($bitcoinus_key)) { ?>
                   <div class="text-danger"><?php echo $nls['error_key'] ?></div>
                 <?php } ?>
               </div>
@@ -92,8 +92,8 @@
             <div class="form-group">
               <label class="col-sm-2 control-label" for="entry-test"><?php echo $nls['nls_items'] ?></label>
               <div class="col-sm-10">
-                <select name="payment_bitcoinus_items" id="entry-items" class="form-control">
-                  <?php if ($payment_bitcoinus_items) { ?>
+                <select name="bitcoinus_items" id="entry-items" class="form-control">
+                  <?php if ($bitcoinus_items) { ?>
                     <option value="1" selected="selected"><?php echo $nls['nls_send'] ?></option>
                     <option value="0"><?php echo $nls['nls_dontsend'] ?></option>
                   <?php } else { ?>
@@ -111,8 +111,8 @@
             <div class="form-group">
               <label class="col-sm-2 control-label" for="entry-test"><?php echo $nls['nls_test'] ?></label>
               <div class="col-sm-10">
-                <select name="payment_bitcoinus_test" id="entry-test" class="form-control">
-                  <?php if ($payment_bitcoinus_test) { ?>
+                <select name="bitcoinus_test" id="entry-test" class="form-control">
+                  <?php if ($bitcoinus_test) { ?>
                     <option value="1" selected="selected"><?php echo $nls['nls_on'] ?></option>
                     <option value="0"><?php echo $nls['nls_off'] ?></option>
                   <?php } else { ?>

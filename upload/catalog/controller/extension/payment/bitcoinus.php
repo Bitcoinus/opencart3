@@ -14,7 +14,7 @@ class ControllerExtensionPaymentBitcoinus extends Controller
     }
     $this->load->model('checkout/order');
     $order = $this->model_checkout_order->getOrder($this->session->data['order_id']);
-    $pid = $this->config->get('payment_bitcoinus_pid');
+    $pid = ($this->config->get('payment_bitcoinus_pid')!==NULL) ? $this->config->get('payment_bitcoinus_pid') : $this->config->get('bitcoinus_pid');
     if (file_exists(DIR_TEMPLATE.$this->config->get('config_template').'config_template')) {
       return $this->load->view($this->config->get('config_template').'config_template',$data);
     } else {
@@ -58,11 +58,11 @@ class ControllerExtensionPaymentBitcoinus extends Controller
     }
     $fullname = trim(trim($firstname).' '.trim($lastname));
     // get project id
-    $pid = $this->config->get('payment_bitcoinus_pid');
+    $pid = ($this->config->get('payment_bitcoinus_pid')!==NULL) ? $this->config->get('payment_bitcoinus_pid') : $this->config->get('bitcoinus_pid');
     // get project secret key
-    $key = $this->config->get('payment_bitcoinus_key');
+    $key = ($this->config->get('payment_bitcoinus_key')!==NULL) ? $this->config->get('payment_bitcoinus_key') : $this->config->get('bitcoinus_key');
     // check test mode
-    $test = $this->config->get('payment_bitcoinus_test');
+    $test = ($this->config->get('payment_bitcoinus_test')!==NULL) ? $this->config->get('payment_bitcoinus_test') : $this->config->get('bitcoinus_test');
     // create payment array
     $data = json_encode((object)[
       'pid' => $pid,
@@ -95,8 +95,8 @@ class ControllerExtensionPaymentBitcoinus extends Controller
     // init variables
     $data = stripslashes(filter_var($_REQUEST['data'],FILTER_SANITIZE_STRING,FILTER_FLAG_NO_ENCODE_QUOTES));
     $signature = filter_var($_REQUEST['signature'],FILTER_SANITIZE_STRING);
-    $pid = $this->config->get('payment_bitcoinus_pid');
-    $key = $this->config->get('payment_bitcoinus_key');
+    $pid = ($this->config->get('payment_bitcoinus_pid')!==NULL) ? $this->config->get('payment_bitcoinus_pid') : $this->config->get('bitcoinus_pid');
+    $key = ($this->config->get('payment_bitcoinus_key')!==NULL) ? $this->config->get('payment_bitcoinus_key') : $this->config->get('bitcoinus_key');
     // check signature
     $signature_local = hash_hmac('sha256',$data,$key);
     if ($signature_local != $signature) exit('Invalid signature');
