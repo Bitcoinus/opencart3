@@ -61,6 +61,8 @@ class ControllerExtensionPaymentBitcoinus extends Controller
     $pid = ($this->config->get('payment_bitcoinus_pid')!==NULL) ? $this->config->get('payment_bitcoinus_pid') : $this->config->get('bitcoinus_pid');
     // get project secret key
     $key = ($this->config->get('payment_bitcoinus_key')!==NULL) ? $this->config->get('payment_bitcoinus_key') : $this->config->get('bitcoinus_key');
+    // check items
+    $items = ($this->config->get('payment_bitcoinus_items')!==NULL) ? $this->config->get('payment_bitcoinus_items') : $this->config->get('bitcoinus_items');
     // check test mode
     $test = ($this->config->get('payment_bitcoinus_test')!==NULL) ? $this->config->get('payment_bitcoinus_test') : $this->config->get('bitcoinus_test');
     // create payment array
@@ -77,8 +79,23 @@ class ControllerExtensionPaymentBitcoinus extends Controller
       'test' => $test
     ]);
 
+    // create items array
+    if (intval($items) == 1) {
+      $itms = [];
+      $products = $this->model_checkout_order->getOrderProducts($order_id);
+      foreach ($products as $product) {
+        $product_object = (object)[
+          'title' => $product['name'],
+          'qty' => number_format($product['quantity'],2),
+          'price' => $product['price']
+        ];
+        $itms[] = json_encode($product_object);
+      }
+    }
+
     // perform redirect
     $args = [ 'data' => base64_encode($data), 'signature' => hash_hmac('sha256',$data,$key) ];
+    if (isset($itms)) $args['items'] = base64_encode(json_encode($itms));
     header('Location: https://pay.bitcoinus.io/init?'.http_build_query($args));
 		exit();
   }
