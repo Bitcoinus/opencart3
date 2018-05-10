@@ -82,7 +82,8 @@ class ControllerExtensionPaymentBitcoinus extends Controller
     // create items array
     if (intval($items) == 1) {
       $itms = [];
-      $products = $this->model_checkout_order->getOrderProducts($order_id);
+      $this->load->model('account/order');
+      $products = $this->model_account_order->getOrderProducts($order_id);
       foreach ($products as $product) {
         $product_object = (object)[
           'title' => $product['name'],
